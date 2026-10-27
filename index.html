@@ -2,336 +2,464 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#101010">
-  <meta name="description" content="Welcome to Ns11 Official Website">
-  <title>Ns11 | Official Website</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101010">
+<title>Ns11 | Official Website</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
+<style>
+:root {
+  --gold: #f5bd4b;
+  --bg: #0c0c0d;
+  --panel: #191919;
+  --text: #fff;
+  --muted: #c3c3c3;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, "Noto Sans Bengali", sans-serif;
+  line-height: 1.7;
+}
+a { color: inherit; text-decoration: none; }
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 15px 7%;
+  background: #101010ee;
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid #ffffff13;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--gold);
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+.brand svg { width: 42px; height: 42px; }
+nav { display: flex; gap: 20px; flex-wrap: wrap; }
+nav a { color: #eee; transition: color .25s; }
+nav a:hover { color: var(--gold); }
 
-    :root {
-      --gold: #f4b942;
-      --dark: #101010;
-      --card: #1b1b1b;
-      --white: #ffffff;
-      --muted: #bdbdbd;
-    }
+.hero {
+  min-height: 82vh;
+  padding: 90px 7%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(120deg, #0c0c0d 10%, #211a0eaa 50%, #0c0c0d 100%),
+    radial-gradient(ellipse at 50% 0%, #94651d 0%, #16120b 45%, #0c0c0d 75%);
+  background-size: cover;
+  background-position: center;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: linear-gradient(110deg, transparent 40%,
+    #ffffff08 50%, transparent 60%);
+  transform: translateX(-60%);
+  animation: shine 8s ease-in-out infinite;
+}
+.hero-content { position: relative; max-width: 850px; }
+.eyebrow {
+  color: var(--gold);
+  letter-spacing: 5px;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+h1 {
+  font-size: clamp(42px, 9vw, 82px);
+  line-height: 1.15;
+  margin-bottom: 24px;
+}
+.gold { color: var(--gold); }
+.hero p {
+  color: #e0e0e0;
+  font-size: clamp(16px, 2.5vw, 20px);
+  max-width: 680px;
+  margin: 0 auto 32px;
+}
+.btn {
+  display: inline-block;
+  padding: 13px 25px;
+  border-radius: 7px;
+  background: var(--gold);
+  color: #17120a;
+  font-weight: bold;
+  border: 1px solid var(--gold);
+  cursor: pointer;
+  transition: transform .25s, box-shadow .25s;
+}
+.btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 35px #f5bd4b35;
+}
+section { padding: 75px 7%; }
+.section-title {
+  text-align: center;
+  font-size: clamp(27px, 5vw, 38px);
+  margin-bottom: 12px;
+}
+.description {
+  color: var(--muted);
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 35px;
+}
+.about {
+  max-width: 850px;
+  margin: auto;
+  background: linear-gradient(135deg, #1d1d1d, #121212);
+  border: 1px solid #ffffff18;
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+}
+.about h3 { color: var(--gold); margin-bottom: 12px; }
+.about p { color: var(--muted); }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+.card {
+  padding: 28px 22px;
+  border: 1px solid #ffffff17;
+  background: var(--panel);
+  border-radius: 14px;
+  transition: transform .3s, border-color .3s;
+}
+.card:hover {
+  transform: translateY(-7px);
+  border-color: #f5bd4b99;
+}
+.symbol { font-size: 32px; color: var(--gold); }
+.card h3 { color: var(--gold); margin: 8px 0; }
+.card p { color: var(--muted); font-size: 15px; }
+.contact {
+  text-align: center;
+  max-width: 700px;
+  margin: auto;
+  padding: 32px;
+  border: 1px solid #ffffff18;
+  border-radius: 16px;
+  background: var(--panel);
+}
+.contact p { color: var(--muted); margin: 12px 0 24px; }
+footer {
+  border-top: 1px solid #ffffff17;
+  padding: 25px 15px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+}
+footer span { color: var(--gold); }
 
-    body {
-      font-family: Arial, "Noto Sans Bengali", sans-serif;
-      background: var(--dark);
-      color: var(--white);
-      line-height: 1.7;
-    }
+.reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+@keyframes shine {
+  0%, 25% { transform: translateX(-60%); }
+  70%, 100% { transform: translateX(60%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+@media(max-width:650px) {
+  header { justify-content: center; padding: 13px 4%; }
+  nav { justify-content: center; gap: 12px; font-size: 14px; }
+  .hero { min-height: 72vh; padding: 65px 5%; }
+  .eyebrow { letter-spacing: 3px; }
+  section { padding: 55px 5%; }
+  .about, .contact { padding: 23px; }
+}
 
-    header {
-      background: #151515;
-      border-bottom: 1px solid #292929;
-      padding: 18px 7%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .logo {
-      color: var(--gold);
-      font-size: 30px;
-      font-weight: bold;
-      letter-spacing: 2px;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 15px;
-    }
-
-    nav a:hover {
-      color: var(--gold);
-    }
-
-    .hero {
-      min-height: 78vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 60px 20px;
-      background:
-        radial-gradient(ellipse at top, #493619 0%, #19140d 30%, #101010 72%);
-    }
-
-    .hero-label {
-      color: var(--gold);
-      letter-spacing: 4px;
-      font-size: 13px;
-      margin-bottom: 18px;
-    }
-
-    .hero h1 {
-      font-size: clamp(42px, 9vw, 76px);
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 span {
-      color: var(--gold);
-    }
-
-    .hero p {
-      max-width: 600px;
-      color: #dddddd;
-      font-size: 17px;
-      margin-bottom: 30px;
-    }
-
-    .btn {
-      display: inline-block;
-      background: var(--gold);
-      color: #111111;
-      text-decoration: none;
-      padding: 12px 25px;
-      border-radius: 6px;
-      font-weight: bold;
-      transition: 0.2s;
-    }
-
-    .btn:hover {
-      background: #ffd477;
-      transform: translateY(-2px);
-    }
-
-    section {
-      padding: 65px 7%;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 30px;
-      margin-bottom: 12px;
-    }
-
-    .section-title span {
-      color: var(--gold);
-    }
-
-    .section-desc {
-      color: var(--muted);
-      text-align: center;
-      max-width: 650px;
-      margin: 0 auto 35px;
-    }
-
-    .about-box {
-      max-width: 850px;
-      margin: auto;
-      padding: 30px;
-      text-align: center;
-      background: var(--card);
-      border: 1px solid #333333;
-      border-radius: 12px;
-    }
-
-    .about-box p {
-      color: #dddddd;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid #303030;
-      padding: 25px;
-      border-radius: 12px;
-      text-align: center;
-    }
-
-    .card .symbol {
-      font-size: 32px;
-      color: var(--gold);
-      margin-bottom: 10px;
-    }
-
-    .card h3 {
-      color: var(--gold);
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    .contact-box {
-      text-align: center;
-      max-width: 650px;
-      margin: auto;
-      padding: 30px;
-      background: var(--card);
-      border-radius: 12px;
-      border: 1px solid #303030;
-    }
-
-    .contact-box p {
-      color: var(--muted);
-      margin: 12px 0 22px;
-    }
-
-    footer {
-      border-top: 1px solid #303030;
-      text-align: center;
-      padding: 24px 15px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    footer span {
-      color: var(--gold);
-    }
-
-    @media (max-width: 600px) {
-      header {
-        justify-content: center;
-        text-align: center;
-      }
-
-      nav {
-        justify-content: center;
-        gap: 14px;
-      }
-
-      section {
-        padding: 50px 5%;
-      }
-
-      .hero {
-        min-height: 70vh;
-      }
-
-      .hero p {
-        font-size: 15px;
-      }
-
-      .about-box,
-      .contact-box {
-        padding: 22px;
-      }
-    }
-  </style>
+/* Browser-only editor panel */
+#editor {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #000b;
+  padding: 18px;
+  overflow: auto;
+}
+.editor-box {
+  max-width: 520px;
+  margin: 30px auto;
+  background: #181818;
+  border: 1px solid #484848;
+  border-radius: 14px;
+  padding: 22px;
+}
+.editor-box h2 { color: var(--gold); margin-bottom: 10px; }
+.editor-box label { display: block; margin-top: 14px; }
+.editor-box input, .editor-box textarea {
+  width: 100%;
+  margin-top: 5px;
+  padding: 11px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #0c0c0c;
+  color: white;
+  font: inherit;
+}
+.editor-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+.secondary { background: #333; color: white; border-color: #555; }
+.small-note { color: #bbb; font-size: 13px; margin-top: 12px; }
+.editor-trigger {
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  z-index: 20;
+  border: 1px solid #555;
+  border-radius: 50px;
+  padding: 9px 13px;
+  color: white;
+  background: #222e;
+  cursor: pointer;
+}
+</style>
 </head>
 
 <body>
-  <header>
-    <div class="logo">Ns11</div>
+<header>
+  <a href="#home" class="brand" aria-label="Ns11 Home">
+    <svg viewBox="0 0 100 100" role="img" aria-label="Ns11 logo">
+      <path d="M50 3 L92 27 L92 73 L50 97 L8 73 L8 27 Z"
+        fill="none" stroke="#f5bd4b" stroke-width="5"/>
+      <path d="M29 68 V32 L71 68 V32"
+        fill="none" stroke="#fff" stroke-width="8"
+        stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>Ns11</span>
+  </a>
+  <nav>
+    <a href="#home">হোম</a>
+    <a href="#about">আমাদের সম্পর্কে</a>
+    <a href="#updates">আপডেট</a>
+    <a href="#contact">যোগাযোগ</a>
+  </nav>
+</header>
 
-    <nav>
-      <a href="#home">হোম</a>
-      <a href="#about">আমাদের সম্পর্কে</a>
-      <a href="#updates">আপডেট</a>
-      <a href="#contact">যোগাযোগ</a>
-    </nav>
-  </header>
-
-  <main>
-    <section class="hero" id="home">
-      <div class="hero-label">WELCOME TO OUR WORLD</div>
-      <h1>Welcome to <span>Ns11</span></h1>
-
-      <p>
+<main>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="eyebrow">WELCOME TO OUR WORLD</div>
+      <h1 id="heroTitle">Welcome to <span class="gold">Ns11</span></h1>
+      <p id="heroText">
         একটি নতুন অভিজ্ঞতা, নতুন গল্প এবং নতুন সম্ভাবনার ঠিকানা।
         Ns11-এর অফিসিয়াল ওয়েবসাইটে তোমাকে স্বাগতম!
       </p>
+      <a class="btn" href="#about">আরও জানুন ↗</a>
+    </div>
+  </section>
 
-      <a class="btn" href="#about">আরও জানুন</a>
-    </section>
-
-    <section id="about">
-      <h2 class="section-title">আমাদের <span>সম্পর্কে</span></h2>
-      <p class="section-desc">
-        Ns11 সম্পর্কে জানুন এবং আমাদের সঙ্গে যুক্ত থাকুন।
+  <section id="about" class="reveal">
+    <h2 class="section-title">আমাদের <span class="gold">সম্পর্কে</span></h2>
+    <p class="description">Ns11-এর পরিচয়, লক্ষ্য এবং আমাদের যাত্রা।</p>
+    <div class="about">
+      <h3>Ns11 Official Website</h3>
+      <p id="aboutText">
+        Ns11 হলো আমাদের নিজস্ব অনলাইন প্ল্যাটফর্ম।
+        এখানে নতুন তথ্য, আপডেট এবং আমাদের কার্যক্রম শেয়ার করা হবে।
       </p>
+    </div>
+  </section>
 
-      <div class="about-box">
-        <h3 style="color: var(--gold); margin-bottom: 15px;">
-          Ns11 Official Website
-        </h3>
-        <p>
-          Ns11 হলো আমাদের নিজস্ব অনলাইন প্ল্যাটফর্ম।
-          এখানে আমরা নতুন তথ্য, আপডেট এবং আমাদের কার্যক্রম
-          সবার সঙ্গে শেয়ার করার চেষ্টা করব।
-        </p>
-      </div>
-    </section>
+  <section id="updates" class="reveal">
+    <h2 class="section-title">সর্বশেষ <span class="gold">আপডেট</span></h2>
+    <p class="description">আমাদের নতুন খবর ও কার্যক্রম দেখুন।</p>
+    <div class="cards">
+      <article class="card">
+        <div class="symbol">✦</div>
+        <h3>Welcome to Ns11</h3>
+        <p>আমাদের অফিসিয়াল ওয়েবসাইটে স্বাগতম।</p>
+      </article>
+      <article class="card">
+        <div class="symbol">✧</div>
+        <h3>নতুন আপডেট</h3>
+        <p>নতুন খবর ও তথ্য এখানে প্রকাশ করা হবে।</p>
+      </article>
+      <article class="card">
+        <div class="symbol">★</div>
+        <h3>আমাদের সঙ্গে থাকুন</h3>
+        <p>Ns11-এর নতুন কার্যক্রম সম্পর্কে জানতে যুক্ত থাকুন।</p>
+      </article>
+    </div>
+  </section>
 
-    <section id="updates">
-      <h2 class="section-title">সর্বশেষ <span>আপডেট</span></h2>
-      <p class="section-desc">
-        Ns11-এর নতুন খবর ও কার্যক্রম এখানে প্রকাশ করা হবে।
-      </p>
+  <section id="contact" class="reveal">
+    <h2 class="section-title">যোগাযোগ <span class="gold">করুন</span></h2>
+    <p class="description">আমাদের সঙ্গে যোগাযোগের তথ্য এখানে থাকবে।</p>
+    <div class="contact">
+      <h3>Ns11 Official</h3>
+      <p>তোমার আসল যোগাযোগের লিংক পরে এখানে যোগ করতে পারো।</p>
+      <a href="#home" class="btn">হোম পেজে ফিরে যান ↑</a>
+    </div>
+  </section>
+</main>
 
-      <div class="cards">
-        <div class="card">
-          <div class="symbol">✦</div>
-          <h3>Welcome to Ns11</h3>
-          <p>আমাদের অফিসিয়াল ওয়েবসাইটে স্বাগতম।</p>
-        </div>
+<footer>
+  <p>© <span id="year"></span> <span>Ns11</span> — All Rights Reserved.</p>
+  <p>Made with care by Ns11</p>
+</footer>
 
-        <div class="card">
-          <div class="symbol">✧</div>
-          <h3>নতুন আপডেট</h3>
-          <p>নতুন তথ্য ও খবরের জন্য এই অংশটি দেখুন।</p>
-        </div>
+<button class="editor-trigger" id="openEditor" type="button">
+  ⚙ এডিটর
+</button>
 
-        <div class="card">
-          <div class="symbol">★</div>
-          <h3>আমাদের সঙ্গে থাকুন</h3>
-          <p>Ns11-এর নতুন কার্যক্রম সম্পর্কে জানতে যুক্ত থাকুন।</p>
-        </div>
-      </div>
-    </section>
+<div id="editor" role="dialog" aria-modal="true" aria-labelledby="editorTitle">
+  <div class="editor-box">
+    <h2 id="editorTitle">Ns11 Quick Editor</h2>
+    <p>নিচের লেখা পরিবর্তন করে এই ব্রাউজারে প্রিভিউ দেখো।</p>
 
-    <section id="contact">
-      <h2 class="section-title">যোগাযোগ <span>করুন</span></h2>
-      <p class="section-desc">
-        আমাদের সঙ্গে যোগাযোগের তথ্য এখানে যোগ করতে পারো।
-      </p>
+    <label for="titleInput">ব্যানারের শিরোনাম</label>
+    <input id="titleInput" maxlength="100" value="Welcome to Ns11">
 
-      <div class="contact-box">
-        <h3>Ns11 Official</h3>
-        <p>
-          যোগাযোগের ইমেইল বা সোশ্যাল মিডিয়ার লিংক
-          এখানে যোগ করা যাবে।
-        </p>
-        <a class="btn" href="#home">হোম পেজে ফিরে যান</a>
-      </div>
-    </section>
-  </main>
+    <label for="heroInput">ব্যানারের বর্ণনা</label>
+    <textarea id="heroInput" rows="3" maxlength="400">একটি নতুন অভিজ্ঞতা, নতুন গল্প এবং নতুন সম্ভাবনার ঠিকানা। Ns11-এর অফিসিয়াল ওয়েবসাইটে তোমাকে স্বাগতম!</textarea>
 
-  <footer>
-    <p>© 2026 <span>Ns11</span> — All Rights Reserved.</p>
-    <p>Made with care by Ns11</p>
-  </footer>
+    <label for="aboutInput">আমাদের সম্পর্কে</label>
+    <textarea id="aboutInput" rows="3" maxlength="500">Ns11 হলো আমাদের নিজস্ব অনলাইন প্ল্যাটফর্ম। এখানে নতুন তথ্য, আপডেট এবং আমাদের কার্যক্রম শেয়ার করা হবে।</textarea>
+
+    <label for="bannerInput">ব্যানার ছবির URL (ঐচ্ছিক)</label>
+    <input id="bannerInput" type="url" placeholder="https://example.com/banner.jpg">
+
+    <div class="editor-actions">
+      <button class="btn" id="previewBtn" type="button">প্রিভিউ দেখুন</button>
+      <button class="btn secondary" id="resetBtn" type="button">রিসেট</button>
+      <button class="btn secondary" id="closeEditor" type="button">বন্ধ করুন</button>
+    </div>
+    <p class="small-note">
+      নোট: এটি আসল সুরক্ষিত অ্যাডমিন প্যানেল নয়। পরিবর্তন শুধু এই ব্রাউজারে
+      সংরক্ষিত হয়; সবার ওয়েবসাইটে প্রকাশ করতে GitHub-এ কোড আপডেট করতে হবে।
+      এখানে কোনো পাসওয়ার্ড বা GitHub token লিখবে না।
+    </p>
+  </div>
+</div>
+
+<script>
+const defaults = {
+  title: "Welcome to Ns11",
+  hero: "একটি নতুন অভিজ্ঞতা, নতুন গল্প এবং নতুন সম্ভাবনার ঠিকানা। Ns11-এর অফিসিয়াল ওয়েবসাইটে তোমাকে স্বাগতম!",
+  about: "Ns11 হলো আমাদের নিজস্ব অনলাইন প্ল্যাটফর্ম। এখানে নতুন তথ্য, আপডেট এবং আমাদের কার্যক্রম শেয়ার করা হবে।",
+  banner: ""
+};
+
+const $ = id => document.getElementById(id);
+$("year").textContent = new Date().getFullYear();
+
+function safeLoad() {
+  try {
+    const saved = localStorage.getItem("ns11-editor-preview");
+    return saved ? {...defaults, ...JSON.parse(saved)} : defaults;
+  } catch {
+    return defaults;
+  }
+}
+
+function showData(data) {
+  // textContent prevents editor text from being treated as HTML
+  $("heroTitle").textContent = data.title;
+  $("heroText").textContent = data.hero;
+  $("aboutText").textContent = data.about;
+
+  // Restore gold styling on the title without interpreting user HTML
+  $("heroTitle").replaceChildren(
+    document.createTextNode(data.title.replace(/Ns11/g, "").trim() + " "),
+    Object.assign(document.createElement("span"), {
+      className: "gold",
+      textContent: "Ns11"
+    })
+  );
+
+  if (data.banner && /^https:\/\//i.test(data.banner)) {
+    $("home").style.backgroundImage =
+      `linear-gradient(#0c0c0d99,#0c0c0dcc),url("${data.banner.replace(/["\\]/g, "")}")`;
+  } else {
+    $("home").style.backgroundImage = "";
+  }
+}
+
+function fillEditor(data) {
+  $("titleInput").value = data.title;
+  $("heroInput").value = data.hero;
+  $("aboutInput").value = data.about;
+  $("bannerInput").value = data.banner;
+}
+
+function readEditor() {
+  return {
+    title: $("titleInput").value.trim() || defaults.title,
+    hero: $("heroInput").value.trim(),
+    about: $("aboutInput").value.trim(),
+    banner: $("bannerInput").value.trim()
+  };
+}
+
+let current = safeLoad();
+showData(current);
+fillEditor(current);
+
+$("openEditor").addEventListener("click", () => {
+  $("editor").style.display = "block";
+});
+$("closeEditor").addEventListener("click", () => {
+  $("editor").style.display = "none";
+});
+$("previewBtn").addEventListener("click", () => {
+  current = readEditor();
+  showData(current);
+  try {
+    localStorage.setItem("ns11-editor-preview", JSON.stringify(current));
+    alert("প্রিভিউ আপডেট হয়েছে। এটি শুধু এই ব্রাউজারে সংরক্ষিত।");
+  } catch {
+    alert("প্রিভিউ হয়েছে, কিন্তু ব্রাউজারে সংরক্ষণ করা যায়নি।");
+  }
+});
+$("resetBtn").addEventListener("click", () => {
+  current = {...defaults};
+  try { localStorage.removeItem("ns11-editor-preview"); } catch {}
+  showData(current);
+  fillEditor(current);
+});
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
+  });
+}, {threshold: 0.12});
+
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
