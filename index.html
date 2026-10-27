@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101010">
+  <meta name="description" content="Ns11 — আমাদের অফিসিয়াল ওয়েবসাইট">
+  <title>Ns11 | Official Website</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #101010;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      line-height: 1.7;
+    }
+    header {
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #343434;
+    }
+    .logo { color: #f4b942; font-size: 27px; font-weight: bold; }
+    nav a { color: #fff; margin-left: 12px; text-decoration: none; }
+    .hero {
+      min-height: 65vh;
+      padding: 75px 20px;
+      display: grid;
+      place-content: center;
+      text-align: center;
+      background: radial-gradient(ellipse at top, #503015, #101010 70%);
+    }
+    .hero h1 { font-size: clamp(42px, 10vw, 76px); margin: 0; }
+    .gold { color: #f4b942; }
+    .hero p { color: #ddd; max-width: 500px; }
+    .btn {
+      display: inline-block;
+      background: #f4b942;
+      color: #111;
+      padding: 12px 22px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 12px;
+    }
+    section { padding: 42px 20px; max-width: 850px; margin: auto; }
+    section h2 { color: #f4b942; }
+    .card {
+      background: #1c1c1c;
+      border: 1px solid #383838;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 14px 0;
+    }
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: #aaa;
+      border-top: 1px solid #333;
+    }
+    @media (max-width: 430px) {
+      header { padding: 14px 12px; }
+      nav a { margin-left: 7px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Ns11<span style="color:white">.</span></div>
+    <nav>
+      <a href="#home">হোম</a>
+      <a href="#about">আমাদের সম্পর্কে</a>
+      <a href="#contact">যোগাযোগ</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <p class="gold">WELCOME TO OUR WORLD</p>
+      <h1>Welcome to <span class="gold">Ns11</span></h1>
+      <p>একটি নতুন অভিজ্ঞতা, নতুন গল্প এবং নতুন সম্ভাবনার ঠিকানা।</p>
+      <a class="btn" href="#about">আরও জানুন</a>
+    </section>
+
+    <section id="about">
+      <h2>আমাদের সম্পর্কে</h2>
+      <div class="card">
+        <h3>আমাদের গল্প</h3>
+        <p>Ns11-এর ওয়েবসাইটে তোমাকে স্বাগতম। এখানে আমাদের পরিচিতি,
+        কাজ এবং নতুন আপডেট প্রকাশ করা হবে।</p>
+      </div>
+    </section>
+
+    <section id="updates">
+      <h2>নতুন আপডেট</h2>
+      <div class="card">
+        <h3>আমাদের ওয়েবসাইট চালু হচ্ছে!</h3>
+        <p>এটি Ns11 ওয়েবসাইটের প্রথম সংস্করণ। সামনে আরও নতুন
+        ফিচার যুক্ত করা হবে।</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>যোগাযোগ</h2>
+      <div class="card">
+        <p>Ns11 সম্পর্কে জানতে বা মতামত জানাতে আমাদের সঙ্গে যোগাযোগ করো।</p>
+        <p>এখানে পরে তোমার সঠিক যোগাযোগের লিংক যোগ করতে পারবে।</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2026 Ns11. All rights reserved.</footer>
+</body>
+</html>
