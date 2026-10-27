@@ -1,97 +1,280 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NS11 Neon Arcade</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#080b18;color:white;font-family:Arial,sans-serif;text-align:center}
-header{padding:28px 12px;background:linear-gradient(135deg,#111b3e,#32104b)}
-h1{color:#00f5ff;text-shadow:0 0 15px #00f5ff;font-size:34px;margin:5px}
-header p{color:#ddd}
-main{max-width:900px;margin:auto;padding:18px}
-.stats{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:15px}
-.stat{background:#141b30;border:1px solid #00d9ff;border-radius:12px;padding:12px 20px}
-.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:14px}
-.game{background:#12182b;border:1px solid #343d61;border-radius:16px;padding:18px 8px}
-.game h3{color:#ff4be8}
-button{background:linear-gradient(90deg,#00d9ff,#a63bff);border:0;border-radius:9px;padding:11px 15px;color:white;font-weight:bold;cursor:pointer;margin:5px}
-button:active{transform:scale(.96)}
-#play{display:none;background:#11182a;border:1px solid #00f5ff;border-radius:16px;padding:20px;margin-top:20px}
-#message{min-height:28px;color:#00f5ff}
-input{padding:10px;width:100px;border-radius:8px;border:1px solid #00f5ff;background:#080b18;color:white}
-footer{padding:22px;color:#9ca3bd;font-size:13px}
+body{margin:0;background:#080b18;color:#fff;font:16px Arial}
+header{text-align:center;padding:24px;background:linear-gradient(120deg,#101c3c,#35104b)}
+h1{color:#00f5ff;text-shadow:0 0 15px #00f5ff;margin:5px}
+nav{display:flex;justify-content:center;gap:7px;flex-wrap:wrap}
+button{background:linear-gradient(100deg,#007fae,#7935bd);color:white;border:1px solid #465178;border-radius:10px;padding:10px 13px;margin:4px;cursor:pointer;font-weight:bold}
+main{max-width:950px;margin:auto;padding:14px}
+.hero,.panel,.game,.stat{background:#12182b;border:1px solid #303d60;border-radius:15px;padding:15px}
+.hero{text-align:center;background:linear-gradient(120deg,#111c39,#29113e)}
+.cyan{color:#00f5ff}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+.stat{text-align:center;font-size:13px}
+.stat b{display:block;font-size:22px;color:#00f5ff;margin-top:6px}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.game{text-align:center}
+.emoji{font-size:32px}
+.game h3{color:#ff8bec}
+.muted{color:#a9b4d0;font-size:13px}
+#play{display:none;margin-top:15px;text-align:center}
+#message{color:#00f5ff;min-height:26px}
+input,select{padding:10px;border-radius:8px;background:#080b18;color:white;border:1px solid #465178;margin:5px;max-width:100%}
+.hidden{display:none!important}
+table{width:100%;border-collapse:collapse}
+td,th{text-align:left;padding:10px;border-bottom:1px solid #303d60}
+th{color:#00f5ff}
+.avatar{font-size:36px}
+footer{text-align:center;color:#9ba7c6;padding:20px;font-size:12px}
+@media(max-width:420px){
+.games{grid-template-columns:repeat(2,minmax(0,1fr))}
+.stats{gap:5px}
+.stat{padding:9px 3px}
+}
 </style>
 </head>
 <body>
 <header>
 <h1>⚡ NS11 ARCADE</h1>
 <p>PLAY • CHALLENGE • HAVE FUN</p>
+<nav>
+<button onclick="section('home')">🏠 হোম</button>
+<button onclick="section('profile')">👤 প্রোফাইল</button>
+<button onclick="section('leaderboard')">🏆 লিডারবোর্ড</button>
+</nav>
 </header>
 <main>
+<section id="home">
+<div class="hero">
+<h2>স্বাগতম <span class="cyan">NS11 Neon Arcade</span>-এ!</h2>
+<p class="muted">ফ্রি গেম খেলো, স্কোর বাড়াও, নিজের রেকর্ড ভাঙো।</p>
+<button onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">গেম খেলো 🎮</button>
+</div>
 <div class="stats">
-<div class="stat">🏆 স্কোর: <b id="score">0</b></div>
-<div class="stat">🎮 গেম: <b>6</b></div>
+<div class="stat">⭐ মোট স্কোর<b id="total">0</b></div>
+<div class="stat">🎮 খেলা হয়েছে<b id="played">0</b></div>
+<div class="stat">🏆 সেরা স্কোর<b id="best">0</b></div>
 </div>
-<h2>🎯 গেম বেছে নাও</h2>
+<h2 id="games">🕹️ ৯টি ফ্রি গেম</h2>
 <div class="games">
-<div class="game"><h3>⚡ Reaction</h3><p>দ্রুত ক্লিক করো!</p><button onclick="reaction()">খেলো</button></div>
-<div class="game"><h3>🧠 Memory</h3><p>সংখ্যা মনে রাখো</p><button onclick="memory()">খেলো</button></div>
-<div class="game"><h3>✊ RPS</h3><p>পাথর-কাগজ-কাঁচি</p><button onclick="rps()">খেলো</button></div>
-<div class="game"><h3>🔢 Guess</h3><p>সংখ্যা খুঁজে বের করো</p><button onclick="guess()">খেলো</button></div>
-<div class="game"><h3>❓ Quiz</h3><p>প্রশ্নের উত্তর দাও</p><button onclick="quiz()">খেলো</button></div>
-<div class="game"><h3>👆 Tap</h3><p>ট্যাপ করে স্কোর বাড়াও</p><button onclick="tapGame()">খেলো</button></div>
+<div class="game"><div class="emoji">⚡</div><h3>Reaction Rush</h3><p class="muted">দ্রুত চাপ দাও</p><button onclick="reaction()">খেলো</button></div>
+<div class="game"><div class="emoji">🧠</div><h3>Memory Match</h3><p class="muted">সংখ্যা মনে রাখো</p><button onclick="memory()">খেলো</button></div>
+<div class="game"><div class="emoji">✊</div><h3>Rock Paper Scissors</h3><p class="muted">কম্পিউটারকে হারাও</p><button onclick="rps()">খেলো</button></div>
+<div class="game"><div class="emoji">🔢</div><h3>Number Guess</h3><p class="muted">সংখ্যা খুঁজে বের করো</p><button onclick="guess()">খেলো</button></div>
+<div class="game"><div class="emoji">❓</div><h3>Quick Quiz</h3><p class="muted">প্রশ্নের উত্তর দাও</p><button onclick="quiz()">খেলো</button></div>
+<div class="game"><div class="emoji">👆</div><h3>Tap Challenge</h3><p class="muted">১০ সেকেন্ডে ট্যাপ</p><button onclick="tapGame()">খেলো</button></div>
+<div class="game"><div class="emoji">⭕</div><h3>Tic Tac Toe</h3><p class="muted">কম্পিউটারের বিরুদ্ধে</p><button onclick="tic()">খেলো</button></div>
+<div class="game"><div class="emoji">🎯</div><h3>Target Click</h3><p class="muted">লক্ষ্যবস্তুতে চাপ দাও</p><button onclick="targetGame()">খেলো</button></div>
+<div class="game"><div class="emoji">🔤</div><h3>Word Scramble</h3><p class="muted">অক্ষর সাজাও</p><button onclick="wordGame()">খেলো</button></div>
 </div>
-<section id="play">
+</section>
+
+<section id="profile" class="panel hidden">
+<h2>👤 ডেমো প্রোফাইল</h2>
+<p><span class="avatar" id="avatarShow">🦊</span> <b id="pname">Player One</b></p>
+<p>মোট স্কোর: <b class="cyan" id="pscore">0</b></p>
+<label>নাম: </label><input id="name" maxlength="18" placeholder="তোমার নাম"><br>
+<label>অ্যাভাটার: </label>
+<select id="avatar">
+<option>🦊</option><option>🐼</option><option>🐯</option><option>🐸</option>
+<option>🐲</option><option>👾</option><option>🚀</option><option>⭐</option>
+</select><br>
+<button onclick="saveProfile()">প্রোফাইল সেভ</button>
+<p class="muted">এটি ডেমো প্রোফাইল। পাসওয়ার্ড দিও না।</p>
+</section>
+
+<section id="leaderboard" class="panel hidden">
+<h2>🏆 লিডারবোর্ড</h2>
+<p class="muted">এই ব্রাউজারে সেভ হওয়া স্কোর</p>
+<table>
+<thead><tr><th>র‍্যাঙ্ক</th><th>প্লেয়ার</th><th>স্কোর</th></tr></thead>
+<tbody id="rows"></tbody>
+</table>
+<button onclick="resetScores()">স্কোর রিসেট</button>
+</section>
+
+<section id="play" class="panel">
 <h2 id="title">গেম</h2>
 <div id="area"></div>
 <p id="message"></p>
 <button onclick="closeGame()">গেম বন্ধ</button>
 </section>
 </main>
-<footer>NS11 Neon Arcade • Free browser games • No real-money betting</footer>
+<footer>NS11 Neon Arcade • Free games • No real-money betting or cashout</footer>
+
 <script>
-let score=Number(localStorage.getItem('ns11score')||0);
-const scoreEl=document.getElementById('score');
-scoreEl.textContent=score;
-function add(n=1){score+=n;scoreEl.textContent=score;localStorage.setItem('ns11score',score)}
-function start(title,html){document.getElementById('play').style.display='block';document.getElementById('title').textContent=title;document.getElementById('area').innerHTML=html;document.getElementById('message').textContent='';document.getElementById('play').scrollIntoView({behavior:'smooth'})}
-function say(t){document.getElementById('message').textContent=t}
-function closeGame(){document.getElementById('play').style.display='none'}
-function reaction(){
-start('⚡ Reaction Rush','<p>প্রস্তুত হলে Start চাপো। সবুজ হলে দ্রুত চাপবে!</p><button id="go">Start</button>');
-let go=document.getElementById('go'),timer,ready=false;
-go.onclick=()=>{go.disabled=true;go.textContent='অপেক্ষা করো...';ready=false;timer=setTimeout(()=>{ready=true;go.disabled=false;go.textContent='এখন চাপো!'},1000+Math.random()*3000);go.onclick=()=>{if(!ready){clearTimeout(timer);say('খুব তাড়াতাড়ি! আবার চেষ্টা করো।');go.disabled=false;go.textContent='আবার খেলো';go.onclick=reaction}else{add(5);say('দারুণ! ৫ পয়েন্ট পেয়েছ।');go.disabled=true}}}
+const $=x=>document.getElementById(x);
+const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}};
+let profile=read('ns11Profile',{name:'Player One',avatar:'🦊'});
+let s=read('ns11Stats',{score:0,played:0,best:0});
+let board=read('ns11Board',[]);
+
+function save(){
+localStorage.setItem('ns11Profile',JSON.stringify(profile));
+localStorage.setItem('ns11Stats',JSON.stringify(s));
+localStorage.setItem('ns11Board',JSON.stringify(board));
 }
+function ui(){
+$('total').textContent=s.score;
+$('played').textContent=s.played;
+$('best').textContent=s.best;
+$('pname').textContent=profile.name;
+$('pscore').textContent=s.score;
+$('avatarShow').textContent=profile.avatar;
+$('name').value=profile.name;
+$('avatar').value=profile.avatar;
+render();
+}
+function pts(n){
+s.score+=n;s.played++;s.best=Math.max(s.best,n);
+let p=board.find(x=>x.name===profile.name);
+if(p)p.score=Math.max(p.score,s.score);
+else board.push({name:profile.name,avatar:profile.avatar,score:s.score});
+board.sort((a,b)=>b.score-a.score);board=board.slice(0,10);
+save();ui();
+}
+function render(){
+$('rows').innerHTML=board.length?
+board.map((p,i)=>'<tr><td>'+(i+1)+'</td><td>'+safe(p.avatar)+' '+safe(p.name)+'</td><td>'+p.score+'</td></tr>').join(''):
+'<tr><td colspan="3">এখনও স্কোর নেই—গেম খেলে শুরু করো!</td></tr>';
+}
+function safe(x){
+return String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+}
+function section(id){
+['home','profile','leaderboard'].forEach(x=>$(x).classList.toggle('hidden',x!==id));
+$('play').style.display='none';scrollTo(0,0);render();
+}
+function start(t,h){
+$('play').style.display='block';$('title').textContent=t;
+$('area').innerHTML=h;$('message').textContent='';
+$('play').scrollIntoView({behavior:'smooth'});
+}
+function say(t){$('message').textContent=t}
+function closeGame(){$('play').style.display='none'}
+function saveProfile(){
+profile={name:$('name').value.trim().slice(0,18)||'Player One',avatar:$('avatar').value};
+save();ui();say('প্রোফাইল সেভ হয়েছে!');
+}
+function resetScores(){
+if(confirm('স্কোর মুছবে?')){s={score:0,played:0,best:0};board=[];save();ui()}
+}
+
+function reaction(){
+start('⚡ Reaction Rush','<p>Start চাপো, তারপর সবুজ হলে আবার চাপো!</p><button id="r">Start</button>');
+let timer=null,ready=false,done=false;
+$('r').onclick=()=>{
+if(done)return reaction();
+if(ready){done=true;pts(5);say('দারুণ! +৫ পয়েন্ট');$('r').textContent='আবার খেলো';return}
+if(timer){clearTimeout(timer);timer=null;say('খুব তাড়াতাড়ি! আবার চেষ্টা করো');$('r').textContent='Start';return}
+$('r').textContent='অপেক্ষা করো...';
+timer=setTimeout(()=>{
+ready=true;timer=null;$('r').textContent='এখন চাপো!';$('r').style.background='#168b52';
+},1000+Math.random()*2500);
+};
+}
+
 function memory(){
-let n=Math.floor(10+Math.random()*90);
-start('🧠 Memory Match','<p>এই সংখ্যাটি মনে রাখো: <b id="num" style="font-size:30px;color:#00f5ff">'+n+'</b></p><button id="hide">লুকাও</button><div id="answer" style="display:none"><p>সংখ্যাটি কী ছিল?</p><input id="mem" type="number"><button id="check">দেখি</button></div>');
-document.getElementById('hide').onclick=()=>{document.getElementById('num').textContent='?';document.getElementById('answer').style.display='block'};
-document.getElementById('check').onclick=()=>{if(Number(document.getElementById('mem').value)===n){say('সঠিক! ৩ পয়েন্ট!');add(3)}else say('আবার চেষ্টা করো! সঠিক সংখ্যা ছিল '+n)};
+let n=10+Math.floor(Math.random()*90);
+start('🧠 Memory Match','<p>সংখ্যাটি মনে রাখো</p><h1 id="mn">'+n+'</h1><button id="hide">লুকাও</button><div id="mf" class="hidden"><input id="mi" type="number"><button id="check">জমা দাও</button></div>');
+$('hide').onclick=()=>{$('mn').textContent='?';$('mf').classList.remove('hidden')};
+$('check').onclick=()=>Number($('mi').value)===n?(say('সঠিক! +৩'),pts(3)):say('আবার চেষ্টা করো! সংখ্যা ছিল '+n);
 }
 function rps(){
-start('✊ Rock Paper Scissors','<p>তোমার পছন্দ বেছে নাও</p><button onclick="playRPS(0)">✊ পাথর</button><button onclick="playRPS(1)">✋ কাগজ</button><button onclick="playRPS(2)">✌️ কাঁচি</button>');
+start('✊ Rock Paper Scissors','<button onclick="pr(0)">✊ পাথর</button><button onclick="pr(1)">✋ কাগজ</button><button onclick="pr(2)">✌️ কাঁচি</button>');
 }
-function playRPS(x){let names=['পাথর','কাগজ','কাঁচি'],y=Math.floor(Math.random()*3);if(x===y)say('ড্র! কম্পিউটারও '+names[y]+' বেছে নিয়েছে।');else if((x-y+3)%3===1){say('তুমি জিতেছ! কম্পিউটার: '+names[y]);add(2)}else say('কম্পিউটার জিতেছে! বেছে নিয়েছিল '+names[y]);}
+function pr(x){
+let y=Math.floor(Math.random()*3),a=['পাথর','কাগজ','কাঁচি'];
+if(x===y)say('ড্র! কম্পিউটার: '+a[y]);
+else if((x-y+3)%3===1){say('জিতেছ! +২');pts(2)}
+else say('কম্পিউটার জিতেছে: '+a[y]);
+}
 function guess(){
-let n=Math.floor(Math.random()*20)+1,tries=0;
-start('🔢 Number Guess','<p>১ থেকে ২০-এর মধ্যে সংখ্যা ধরো</p><input id="guessnum" type="number" min="1" max="20"><button id="submitguess">Guess</button>');
-document.getElementById('submitguess').onclick=()=>{let v=Number(document.getElementById('guessnum').value);tries++;if(v===n){say('সঠিক উত্তর! 🎉 ৫ পয়েন্ট!');add(5)}else if(v<n)say('আরও বড় সংখ্যা! চেষ্টা: '+tries);else say('আরও ছোট সংখ্যা! চেষ্টা: '+tries)};
+let n=1+Math.floor(Math.random()*20),done=false;
+start('🔢 Number Guess','<p>১ থেকে ২০-এর সংখ্যা ধরো</p><input id="gi" type="number"><button id="gb">Guess</button>');
+$('gb').onclick=()=>{
+let v=Number($('gi').value);if(done)return;
+if(v===n){done=true;say('সঠিক! +৫');pts(5)}
+else say(v<n?'আরও বড় সংখ্যা!':'আরও ছোট সংখ্যা!');
+};
 }
+let qs=[
+['বাংলাদেশের রাজধানী?',['ঢাকা','খুলনা','সিলেট'],0],
+['২+৫=?',['৬','৭','৮'],1],
+['সপ্তাহে কয় দিন?',['৫','৬','৭'],2],
+['সূর্য ওঠে কোন দিকে?',['পশ্চিম','পূর্ব','উত্তর'],1]
+];
 function quiz(){
-let qs=[{q:'বাংলাদেশের রাজধানী কোনটি?',a:['ঢাকা','চট্টগ্রাম','খুলনা'],c:0},{q:'২ + ৫ = কত?',a:['৬','৭','৮'],c:1},{q:'এক সপ্তাহে কয় দিন?',a:['৫','৬','৭'],c:2}];
 let q=qs[Math.floor(Math.random()*qs.length)];
-start('❓ Quick Quiz','<p>'+q.q+'</p>'+q.a.map((a,i)=>'<button onclick="answerQuiz('+i+','+q.c+')">'+a+'</button>').join(''));
+start('❓ Quick Quiz','<p>'+q[0]+'</p>'+q[1].map((a,i)=>'<button onclick="qa('+i+','+q[2]+')">'+a+'</button>').join(''));
 }
-function answerQuiz(a,c){if(a===c){say('সঠিক উত্তর! ৩ পয়েন্ট 🎉');add(3)}else say('ভুল হয়েছে, আবার চেষ্টা করো!')}
+function qa(a,c){
+if(a===c){say('সঠিক! +৩');pts(3)}
+else say('ভুল হয়েছে, আবার চেষ্টা করো!');
+}
 function tapGame(){
-start('👆 Tap Challenge','<p>১০ সেকেন্ডে যতবার পারো ট্যাপ করো!</p><h2 id="taps">0</h2><button id="tap">TAP!</button>');
-let count=0,left=10,active=true;
-document.getElementById('tap').onclick=()=>{if(active){count++;document.getElementById('taps').textContent=count}};
-let clock=setInterval(()=>{left--;if(left<=0){clearInterval(clock);active=false;say('সময় শেষ! '+count+' ট্যাপ, পেয়েছ '+count+' পয়েন্ট।');add(count);document.getElementById('tap').disabled=true}},1000);
+start('👆 Tap Challenge','<p>১০ সেকেন্ডে যতবার পারো ট্যাপ করো</p><h1 id="tc">0</h1><p id="tm">সময়: ১০</p><button id="tb">TAP!</button>');
+let n=0,t=10,on=true;
+$('tb').onclick=()=>{if(on)$('tc').textContent=++n};
+let timer=setInterval(()=>{
+t--;$('tm').textContent='সময়: '+t;
+if(t<=0){clearInterval(timer);on=false;$('tb').disabled=true;say('সময় শেষ! +'+n);pts(n)}
+},1000);
 }
+function tic(){
+let c=Array(9).fill(''),end=false;
+start('⭕ Tic Tac Toe','<p>তুমি X, কম্পিউটার O</p><div id="board" style="display:grid;grid-template-columns:repeat(3,70px);gap:6px;justify-content:center"></div><button onclick="tic()">আবার খেলো</button>');
+function won(m){
+return [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]].some(a=>a.every(i=>c[i]===m));
+}
+function draw(){
+$('board').innerHTML=c.map((v,i)=>'<button style="height:60px;font-size:24px" '+(v||end?'disabled':'')+' onclick="move('+i+')">'+v+'</button>').join('');
+}
+window.move=i=>{
+if(end||c[i])return;c[i]='X';
+if(won('X')){end=true;draw();say('তুমি জিতেছ! +৫');pts(5);return}
+if(c.every(Boolean)){end=true;draw();say('ড্র!');return}
+let f=c.map((v,i)=>v?null:i).filter(v=>v!==null);
+c[f[Math.floor(Math.random()*f.length)]]='O';
+if(won('O')){end=true;say('কম্পিউটার জিতেছে!')}
+else if(c.every(Boolean)){end=true;say('ড্র!')}
+draw();
+};
+draw();
+}
+function targetGame(){
+start('🎯 Target Click','<p>১৫ সেকেন্ডে লক্ষ্যবস্তুতে চাপ দাও!</p><p id="time">সময়: ১৫</p><div id="ta" style="height:180px;position:relative;background:#080d1b;border-radius:12px;overflow:hidden"><button id="tg" style="position:absolute;border-radius:50%">🎯</button></div><h3 id="ts">স্কোর: 0</h3>');
+let n=0,t=15,on=true;
+function move(){
+$('tg').style.left=Math.floor(Math.random()*Math.max(1,$('ta').clientWidth-60))+'px';
+$('tg').style.top=Math.floor(Math.random()*125)+'px';
+}
+$('tg').onclick=()=>{if(on){n++;$('ts').textContent='স্কোর: '+n;move()}};
+let timer=setInterval(()=>{
+t--;$('time').textContent='সময়: '+t;
+if(t<=0){clearInterval(timer);on=false;$('tg').disabled=true;say('সময় শেষ! +'+n);pts(n)}
+},1000);
+move();
+}
+function wordGame(){
+let list=['BANGLA','ARCADE','GAMING','PLANET','FRIEND'];
+let w=list[Math.floor(Math.random()*list.length)];
+let m=w.split('').sort(()=>Math.random()-.5).join('');
+if(m===w)m=w.slice(1)+w[0];
+start('🔤 Word Scramble','<p>অক্ষর সাজিয়ে শব্দ লেখো</p><h2 class="cyan">'+m+'</h2><input id="wa" placeholder="শব্দ লেখো"><button id="wc">চেক</button>');
+$('wc').onclick=()=>{
+if($('wa').value.trim().toUpperCase()===w){say('সঠিক! +৪');pts(4)}
+else say('আবার চেষ্টা করো!');
+};
+}
+ui();
 </script>
 </body>
 </html>
